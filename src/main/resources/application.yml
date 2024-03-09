@@ -1,0 +1,14 @@
+server:
+    error:
+        include-stacktrace: on-param
+    servlet:
+      context-path: /api
+        
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/spring_boot_essentials?useSSL=false&createDatabaseIfNotExists=true
+        username: postgres
+        password: admin
+    jpa:
+        hibernate:
+            ddl-auto: update
