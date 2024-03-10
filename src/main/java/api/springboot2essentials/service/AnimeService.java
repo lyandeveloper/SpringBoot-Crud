@@ -1,6 +1,7 @@
 package api.springboot2essentials.service;
 
 
+import api.springboot2essentials.mapper.AnimeMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -27,8 +28,7 @@ public class AnimeService  {
     }
 
     public Anime save(AnimeRequestDTO animeRequest) {
-        Anime anime = Anime.builder().name(animeRequest.getName()).build();
-        return animeRepository.save(anime);
+        return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animeRequest));
     }
 
     public void delete(long id) {
@@ -37,7 +37,8 @@ public class AnimeService  {
 
      public void update(AnimeRequestDTO body, long id) {
         Anime animeFound = findById(id);
-        Anime anime = Anime.builder().id(animeFound.getId()).name(body.getName()).build();
+        Anime anime = AnimeMapper.INSTANCE.toAnime(body);
+        anime.setId(animeFound.getId());
         animeRepository.save(anime);
     }
 }
