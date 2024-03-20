@@ -1,6 +1,7 @@
 package api.springboot2essentials.service;
 
 
+import api.springboot2essentials.exception.BadRequestException;
 import api.springboot2essentials.mapper.AnimeMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class AnimeService  {
 
     public Anime findById(long id) {
         return animeRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Anime not found"));
+                .orElseThrow(() -> new BadRequestException("Anime not found"));
     }
 
     public List<Anime> findByName(String name) {
