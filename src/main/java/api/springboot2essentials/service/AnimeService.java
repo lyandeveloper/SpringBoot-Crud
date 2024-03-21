@@ -5,6 +5,7 @@ import api.springboot2essentials.exception.BadRequestException;
 import api.springboot2essentials.mapper.AnimeMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import api.springboot2essentials.domain.Anime;
 import api.springboot2essentials.dtos.AnimeRequestDTO;
@@ -32,6 +33,7 @@ public class AnimeService  {
         return animeRepository.findByName(name);
     }
 
+    @Transactional
     public Anime save(AnimeRequestDTO animeRequest) {
         return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animeRequest));
     }
